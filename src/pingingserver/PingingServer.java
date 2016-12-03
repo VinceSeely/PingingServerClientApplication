@@ -7,7 +7,7 @@ package pingingserver;
 
 /**
  *
- * @author seelyv
+ * @author seelyv rajlamar
  */
 public class PingingServer {
 
