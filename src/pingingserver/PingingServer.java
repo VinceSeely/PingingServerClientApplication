@@ -9,6 +9,8 @@ package pingingserver;
  *
  * @author seelyv rajlamar
  */
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
 import java.net.ServerSocket;
 import java.net.Socket;
 public class PingingServer {
@@ -37,11 +39,12 @@ public class PingingServer {
     {
         try
         {
-            ServerSocket serverSocket = new ServerSocket(PORT_NUMBER);
+            DatagramSocket serverSocket = new DatagramSocket(PORT_NUMBER);
             while(true)
             {
-               Socket socket = serverSocket.accept();
-               PingingThread ping = new PingingThread(socket);
+               DatagramPacket request = new DatagramPacket(new byte[1024], 1024);
+               serverSocket.receive(request);
+               PingingThread ping = new PingingThread(serverSocket, request);
                ping.start();
             }
         }
